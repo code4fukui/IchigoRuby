@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+
+<h1>IchigoRuby</h1>
+
+<span class=pane>
+<textarea id=src>
+S=0
+FOR I IN 1..10
+ P I
+ S=S+I
+END
+P S
+</textarea><br>
+<button id=btnrun>RUN</button>
+<button id=btnstop>STOP</button>
+</span>
+<span class=pane>
+<textarea id=taoutput></textarea>
+<button id=btnclear>CLEAR</button>
+</span>
+
+<hr>
+<a href=https://github.com/code4fukui/IchigoRuby/>src on GitHub</a>
+ 
+<script type="module">
+import { execRuby } from "https://code4fukui.github.io/Ruby-Jam/execRuby.js";
+
+const funcs = {};
+
+const output = (s) => {
+  taoutput.value += s + "\n";
+  taoutput.scrollTop = taoutput.scrollHeight;
+};
+
+btnstop.disabled = true;
+btnrun.onclick = async () => {
+  btnrun.disabled = true;
+  btnstop.disabled = false;
+  try {
+    const abortctrl = new AbortController();
+    btnstop.onclick = async () => {
+      abortctrl.abort();
+    };
+    const debug = true;
+    await execRuby(src.value.toLowerCase(), { funcs, abortctrl, output, debug });
+    output("OK");
+  } catch (e) {
+    if (!e) {
+      output("Break");
+    } else {
+      //output("err!");
+      output(e);
+    }
+  }
+  btnrun.disabled = false;
+  btnstop.disabled = true;
+};
+
+btnclear.onclick = () => taoutput.value = "";
+
+</script>
+
+<style>
+.pane {
+  display: inline-block;
+  width: 45vw;
+  padding-right: 0.5em;
+}
+@font-face {
+  font-family: "IchigoJam";
+  src: url("IchigoJam-1.4.woff") format("woff");
+}
+textarea {
+  font-family: IchigoJam;
+  line-height: 1.4;
+  color: white;
+  background: black;
+  box-sizing: border-box;
+  width: 100%;
+  height: 60vh;
+  padding: .5em;
+}
+table {
+  margin-top: 1em;
+}
+a {
+  color: gray !important;
+}
+</style>
