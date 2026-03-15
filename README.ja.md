@@ -3,7 +3,7 @@
 IchigoRubyは、Webブラウザ上で直接Rubyスクリプトを実行し、その出力を表示できるWebベースのRuby実行環境です。
 
 ## デモ
-[https://code4fukui.github.io/IchigoRuby/](https://code4fukui.github.io/IchigoRuby/)で実際に試すことができます。
+[https://code4fukui.github.io/IchigoRuby/](https://code4fukui.github.io/IchigoRuby/)で実際に使用できます。
 
 ## 機能
 - Webブラウザ上でRubyスクリプトを実行できる

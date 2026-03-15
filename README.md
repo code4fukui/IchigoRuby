@@ -1,5 +1,7 @@
 # IchigoRuby
 
+> 日本語のREADMEはこちらです: [README.ja.md](README.ja.md)
+
 IchigoRuby is a web-based Ruby interpreter that allows you to run Ruby scripts and view the output directly in the browser.
 
 ## Demo
